@@ -375,7 +375,6 @@ public class SwiftDataTable: UIView {
         if(shouldReplaceLayout){
             self.layout = SwiftDataTableLayout(dataTable: self)
         }
-        
     }
     
     func applyOptions(_ options: DataTableConfiguration?){
@@ -462,10 +461,13 @@ public extension SwiftDataTable {
     func createDataCellViewModels(with dataStructure: DataStructureModel){// -> DataTableViewModelContent {
         //1. Create the headers
         self.headerViewModels = Array(0..<(dataStructure.headerTitles.count)).map {
+            let sortType = options.showSortOrder ?
+                dataStructure.columnHeaderSortType(for: $0) : DataTableSortType.hidden
             let headerViewModel = DataHeaderFooterViewModel(
                 data: dataStructure.headerTitles[$0],
-                sortType: dataStructure.columnHeaderSortType(for: $0)
-            )
+                sortType: sortType,
+                bgColor: options.headerBgColor,
+                fgColor: options.headerFgColor)
             headerViewModel.configure(dataTable: self, columnIndex: $0)
             return headerViewModel
         }

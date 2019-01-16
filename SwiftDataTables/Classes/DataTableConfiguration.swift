@@ -19,6 +19,7 @@ public struct DataTableColumnOrder {
     }
 }
 public struct DataTableConfiguration {
+    public var showSortOrder: Bool = true
     public var defaultOrdering: DataTableColumnOrder? = nil
     public var heightForSectionFooter: CGFloat = 44
     public var heightForSectionHeader: CGFloat = 44
@@ -34,6 +35,9 @@ public struct DataTableConfiguration {
     
     public var shouldShowVerticalScrollBars: Bool = true
     public var shouldShowHorizontalScrollBars: Bool = false
+    
+    public var headerBgColor: UIColor = UIColor.white
+    public var headerFgColor: UIColor = UIColor.black
     
     public var highlightedAlternatingRowColors = [
         UIColor(red: 0.941, green: 0.941, blue: 0.941, alpha: 1),

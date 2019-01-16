@@ -18,6 +18,8 @@ public class DataHeaderFooterViewModel: DataTableSortable {
     var dataTable: SwiftDataTable!
     
     public var sortType: DataTableSortType
+    public var bgColor: UIColor
+    public var fgColor: UIColor
     
     var imageStringForSortingElement: String? {
         switch self.sortType {
@@ -50,9 +52,11 @@ public class DataHeaderFooterViewModel: DataTableSortable {
     //MARK: - Events
     
     //MARK: - Lifecycle
-    init(data: String, sortType: DataTableSortType){
+    init(data: String, sortType: DataTableSortType, bgColor: UIColor? = UIColor.white, fgColor: UIColor? = UIColor.black){
         self.data = data
         self.sortType = sortType
+        self.bgColor = bgColor!
+        self.fgColor = fgColor!
     }
     
     public func configure(dataTable: SwiftDataTable, columnIndex: Int){
@@ -77,7 +81,7 @@ extension DataHeaderFooterViewModel: CollectionViewSupplementaryElementRepresent
                 return UICollectionReusableView()
         }
         
-        headerView.setup(viewModel: self)
+        headerView.setup(viewModel: self, bgColor: bgColor, fgColor: fgColor)
         switch kind {
         case SwiftDataTable.SupplementaryViewType.columnHeader.rawValue:
             headerView.didTapEvent = { [weak self] in
